@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				matchup: {
+					purple: "#9b87f5",
+					"purple-dark": "#7E69AB",
+					"purple-light": "#E5DEFF",
+					pink: "#D946EF",
+					"pink-light": "#FFDEE2",
+					peach: "#FDE1D3",
+					blue: "#D3E4FD",
 				}
 			},
 			borderRadius: {
@@ -84,11 +94,46 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'slide-right': {
+					'0%': { transform: 'translateX(-100%)' },
+					'100%': { transform: 'translateX(0)' }
+				},
+				'slide-left': {
+					'0%': { transform: 'translateX(100%)' },
+					'100%': { transform: 'translateX(0)' }
+				},
+				'fade-in': {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' }
+				},
+				'bounce-once': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'pulse-once': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.5' }
+				},
+				'swipe-right': {
+					'0%': { transform: 'translateX(0) rotate(0)', opacity: '1' },
+					'100%': { transform: 'translateX(200px) rotate(20deg)', opacity: '0' }
+				},
+				'swipe-left': {
+					'0%': { transform: 'translateX(0) rotate(0)', opacity: '1' },
+					'100%': { transform: 'translateX(-200px) rotate(-20deg)', opacity: '0' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'slide-right': 'slide-right 0.3s ease-out',
+				'slide-left': 'slide-left 0.3s ease-out',
+				'fade-in': 'fade-in 0.3s ease-out',
+				'bounce-once': 'bounce-once 0.5s ease-in-out',
+				'pulse-once': 'pulse-once 0.5s ease-in-out',
+				'swipe-right': 'swipe-right 0.5s forwards ease-out',
+				'swipe-left': 'swipe-left 0.5s forwards ease-out'
 			}
 		}
 	},
