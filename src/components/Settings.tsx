@@ -1,7 +1,7 @@
 
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { User, MapPin, FileText, MessageSquareText, LogOut, Info, Lock } from 'lucide-react';
+import { User, MapPin, FileText, MessageSquareText, LogOut, Info, Lock, Diamond } from 'lucide-react';
 
 interface SettingsProps {
   onLogout: () => void;
@@ -23,6 +23,11 @@ const Settings = ({ onLogout }: SettingsProps) => {
         <Button variant="outline" className="w-full justify-start text-base font-normal h-12">
           <MapPin className="mr-2 h-5 w-5" />
           Cập nhật vị trí
+        </Button>
+        
+        <Button variant="outline" className="w-full justify-start text-base font-normal h-12 text-primary">
+          <Diamond className="mr-2 h-5 w-5" />
+          Nạp kim cương
         </Button>
         
         <Button variant="outline" className="w-full justify-start text-base font-normal h-12">

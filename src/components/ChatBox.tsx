@@ -1,6 +1,6 @@
 
-import { useState } from 'react';
-import { ArrowLeft, Send } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { ArrowLeft, Send, Image, Video } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -24,6 +24,8 @@ const ChatBox = ({
   onSendMessage
 }: ChatBoxProps) => {
   const [text, setText] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const videoInputRef = useRef<HTMLInputElement>(null);
 
   const handleSend = () => {
     if (text.trim()) {
@@ -35,6 +37,31 @@ const ChatBox = ({
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSend();
+    }
+  };
+
+  const handleImageUpload = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleVideoUpload = () => {
+    if (videoInputRef.current) {
+      videoInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      // Here you would normally upload the file to a server
+      // For now, just send a message indicating a file was sent
+      const fileType = event.target.accept.includes('image') ? 'ảnh' : 'video';
+      onSendMessage(`Đã gửi ${fileType}: ${files[0].name}`);
+      
+      // Reset the input
+      event.target.value = '';
     }
   };
 
@@ -92,6 +119,38 @@ const ChatBox = ({
 
       <div className="p-4 border-t">
         <div className="flex items-center gap-2">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="bg-muted h-12 w-12 rounded-full"
+            onClick={handleImageUpload}
+          >
+            <Image size={20} />
+          </Button>
+          <input 
+            type="file" 
+            ref={fileInputRef} 
+            className="hidden" 
+            accept="image/*"
+            onChange={handleFileChange}
+          />
+          
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="bg-muted h-12 w-12 rounded-full"
+            onClick={handleVideoUpload}
+          >
+            <Video size={20} />
+          </Button>
+          <input 
+            type="file" 
+            ref={videoInputRef} 
+            className="hidden" 
+            accept="video/*"
+            onChange={handleFileChange}
+          />
+          
           <Input
             value={text}
             onChange={(e) => setText(e.target.value)}
