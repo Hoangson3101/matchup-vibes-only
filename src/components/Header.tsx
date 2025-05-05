@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { User, Heart, MessageCircle, Settings, Diamond } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,7 +8,41 @@ import { Badge } from '@/components/ui/badge';
 
 const Header = () => {
   const [showPreferences, setShowPreferences] = useState(false);
-  const [diamonds, setDiamonds] = useState(100); // Default diamond count
+  const [diamonds, setDiamonds] = useState(0);
+
+  useEffect(() => {
+    // Initialize diamonds from localStorage or set default
+    const storedDiamonds = localStorage.getItem('diamonds');
+    if (!storedDiamonds) {
+      localStorage.setItem('diamonds', '100');
+      setDiamonds(100);
+    } else {
+      setDiamonds(parseInt(storedDiamonds));
+    }
+
+    // Listen for changes to localStorage
+    const handleStorageChange = () => {
+      const updatedDiamonds = localStorage.getItem('diamonds');
+      if (updatedDiamonds) {
+        setDiamonds(parseInt(updatedDiamonds));
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Also check for diamonds every second (to catch changes made in the same window)
+    const interval = setInterval(() => {
+      const currentDiamonds = localStorage.getItem('diamonds');
+      if (currentDiamonds && parseInt(currentDiamonds) !== diamonds) {
+        setDiamonds(parseInt(currentDiamonds));
+      }
+    }, 1000);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <header className="matchup-header">
@@ -56,7 +90,7 @@ const Header = () => {
           
           <div className="relative">
             <Button variant="ghost" size="icon" asChild className="text-foreground">
-              <Link to="/settings">
+              <Link to="/diamond-recharge">
                 <Diamond size={20} className="text-amber-400" />
               </Link>
             </Button>

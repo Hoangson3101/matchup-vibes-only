@@ -25,10 +25,12 @@ const Settings = ({ onLogout }: SettingsProps) => {
           Cập nhật vị trí
         </Button>
         
-        <Button variant="outline" className="w-full justify-start text-base font-normal h-12 text-primary">
-          <Diamond className="mr-2 h-5 w-5" />
-          Nạp kim cương
-        </Button>
+        <Link to="/diamond-recharge" className="w-full">
+          <Button variant="outline" className="w-full justify-start text-base font-normal h-12 text-primary">
+            <Diamond className="mr-2 h-5 w-5" />
+            Nạp kim cương
+          </Button>
+        </Link>
         
         <Button variant="outline" className="w-full justify-start text-base font-normal h-12">
           <FileText className="mr-2 h-5 w-5" />
