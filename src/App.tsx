@@ -12,6 +12,11 @@ import Settings from "./pages/Settings";
 import ViewProfile from "./pages/ViewProfile";
 import Likes from "./pages/Likes";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
+import ChangePassword from "./pages/ChangePassword";
+import AuthenticatedRoute from "./components/AuthenticatedRoute";
 
 const queryClient = new QueryClient();
 
@@ -22,14 +27,21 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/edit-profile" element={<EditProfile />} />
-          <Route path="/messages" element={<Messages />} />
-          <Route path="/messages/:matchId" element={<Messages />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/view-profile/:profileId" element={<ViewProfile />} />
-          <Route path="/likes" element={<Likes />} />
+          {/* Public routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          
+          {/* Protected routes */}
+          <Route path="/" element={<AuthenticatedRoute><Index /></AuthenticatedRoute>} />
+          <Route path="/profile" element={<AuthenticatedRoute><Profile /></AuthenticatedRoute>} />
+          <Route path="/edit-profile" element={<AuthenticatedRoute><EditProfile /></AuthenticatedRoute>} />
+          <Route path="/messages" element={<AuthenticatedRoute><Messages /></AuthenticatedRoute>} />
+          <Route path="/messages/:matchId" element={<AuthenticatedRoute><Messages /></AuthenticatedRoute>} />
+          <Route path="/settings" element={<AuthenticatedRoute><Settings /></AuthenticatedRoute>} />
+          <Route path="/change-password" element={<AuthenticatedRoute><ChangePassword /></AuthenticatedRoute>} />
+          <Route path="/view-profile/:profileId" element={<AuthenticatedRoute><ViewProfile /></AuthenticatedRoute>} />
+          <Route path="/likes" element={<AuthenticatedRoute><Likes /></AuthenticatedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
