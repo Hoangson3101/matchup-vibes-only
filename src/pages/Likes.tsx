@@ -93,7 +93,7 @@ const Likes = () => {
               {likes.map((user) => (
                 <Link
                   key={user.id}
-                  to={`/view-profile/${user.id}`}
+                  to={`/like-detail/${user.id}`}
                   className="block"
                 >
                   <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all">
