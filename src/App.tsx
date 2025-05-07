@@ -19,6 +19,7 @@ import ChangePassword from "./pages/ChangePassword";
 import DiamondRecharge from "./pages/DiamondRecharge";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import CreateProfile from "./pages/CreateProfile";
+import LikeDetail from "./pages/LikeDetail";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ const App = () => (
           <Route path="/diamond-recharge" element={<AuthenticatedRoute><DiamondRecharge /></AuthenticatedRoute>} />
           <Route path="/view-profile/:profileId" element={<AuthenticatedRoute><ViewProfile /></AuthenticatedRoute>} />
           <Route path="/likes" element={<AuthenticatedRoute><Likes /></AuthenticatedRoute>} />
+          <Route path="/like-detail/:profileId" element={<AuthenticatedRoute><LikeDetail /></AuthenticatedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
