@@ -74,18 +74,7 @@ const Header = () => {
             className="text-foreground"
             onClick={() => setShowPreferences(true)}
           >
-            <svg 
-              width="20" 
-              height="20" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-            >
-              <path d="M16.5 8.25A4.5 4.5 0 0 0 12 12m0 0a4.5 4.5 0 0 0-4.5 4.5M12 12a4.5 4.5 0 0 1-4.5-4.5M12 12a4.5 4.5 0 0 1 4.5 4.5m-1.8-9a8.5 8.5 0 0 0-8.4 0m8.4 9a8.5 8.5 0 0 1-8.4 0" />
-            </svg>
+            <Settings size={20} />
           </Button>
           
           <div className="relative">

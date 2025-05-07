@@ -18,6 +18,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ChangePassword from "./pages/ChangePassword";
 import DiamondRecharge from "./pages/DiamondRecharge";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
+import CreateProfile from "./pages/CreateProfile";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/create-profile" element={<CreateProfile />} />
           
           {/* Protected routes */}
           <Route path="/" element={<AuthenticatedRoute><Index /></AuthenticatedRoute>} />

@@ -5,8 +5,7 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle,
-  DialogClose
+  DialogTitle
 } from '@/components/ui/dialog';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
@@ -22,7 +21,7 @@ interface MatchPreferencesProps {
 const MatchPreferences = ({ open, onClose }: MatchPreferencesProps) => {
   const [gender, setGender] = useState<string>('any');
   const [distance, setDistance] = useState<number>(25);
-  const [ageRange, setAgeRange] = useState<[number, number]>([18, 35]);
+  const [ageRange, setAgeRange] = useState<number[]>([18, 35]);
 
   const handleSave = () => {
     // In a real app, we would save these preferences to a backend
@@ -35,10 +34,6 @@ const MatchPreferences = ({ open, onClose }: MatchPreferencesProps) => {
       <DialogContent className="sm:max-w-md rounded-xl bg-white p-6">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-center text-matchup-purple">Tiêu chí ghép đôi</DialogTitle>
-          <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-            <X className="h-4 w-4" />
-            <span className="sr-only">Close</span>
-          </DialogClose>
         </DialogHeader>
         
         <div className="space-y-6 py-4">

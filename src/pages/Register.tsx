@@ -27,8 +27,15 @@ const Register = () => {
 
     // Simulate registration request
     setTimeout(() => {
-      toast.success("Đăng ký thành công! Vui lòng đăng nhập.");
-      navigate("/login");
+      // Save basic user info to localStorage
+      localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("username", username);
+      localStorage.setItem("email", email);
+      
+      toast.success("Đăng ký thành công! Hãy tạo hồ sơ của bạn.");
+      
+      // Navigate to create profile page
+      navigate("/create-profile");
       setIsLoading(false);
     }, 1500);
   };
