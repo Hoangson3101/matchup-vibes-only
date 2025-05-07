@@ -13,6 +13,7 @@ import { Notification } from "@/types/Notification";
 import { format } from 'date-fns';
 import { vi } from 'date-fns/locale';
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from 'react-router-dom';
 
 // Sample notification data
 const dummyNotifications: Record<string, Notification[]> = {
@@ -54,6 +55,7 @@ const dummyNotifications: Record<string, Notification[]> = {
       timestamp: new Date(Date.now() - 1000 * 60 * 120),
       read: false,
       image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d',
+      profileId: '5',
     },
     {
       id: '5',
@@ -63,6 +65,7 @@ const dummyNotifications: Record<string, Notification[]> = {
       timestamp: new Date(Date.now() - 1000 * 60 * 180),
       read: true,
       image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330',
+      profileId: '6',
     },
   ],
   match_success: [
@@ -74,6 +77,7 @@ const dummyNotifications: Record<string, Notification[]> = {
       timestamp: new Date(Date.now() - 1000 * 60 * 60),
       read: false,
       image: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce',
+      profileId: '7',
     },
   ],
 };
@@ -81,9 +85,11 @@ const dummyNotifications: Record<string, Notification[]> = {
 interface NotificationItemProps {
   notification: Notification;
   onRead: (id: string) => void;
+  onClose?: () => void;
 }
 
-const NotificationItem = ({ notification, onRead }: NotificationItemProps) => {
+const NotificationItem = ({ notification, onRead, onClose }: NotificationItemProps) => {
+  const navigate = useNavigate();
   const formattedTime = format(new Date(notification.timestamp), 'HH:mm', { locale: vi });
   const isToday = new Date().getDate() === notification.timestamp.getDate();
   const dateDisplay = isToday 
@@ -93,6 +99,33 @@ const NotificationItem = ({ notification, onRead }: NotificationItemProps) => {
   const handleClick = () => {
     if (!notification.read) {
       onRead(notification.id);
+    }
+    
+    // Navigation logic based on notification type
+    switch(notification.type) {
+      case 'system':
+        // System notifications typically just mark as read
+        break;
+      case 'message':
+        navigate('/messages');
+        break;
+      case 'match':
+        if (notification.profileId) {
+          navigate(`/like-detail/${notification.profileId}`);
+        } else {
+          navigate('/likes');
+        }
+        break;
+      case 'match_success':
+        if (notification.profileId) {
+          navigate(`/messages`); // Navigate to messages after a successful match
+        }
+        break;
+    }
+    
+    // Close the popover after navigation
+    if (onClose) {
+      onClose();
     }
   };
 
@@ -200,6 +233,7 @@ const NotificationPopup = ({ onClose }: NotificationPopupProps) => {
           key={notification.id} 
           notification={notification} 
           onRead={handleReadNotification} 
+          onClose={onClose}
         />
       ));
     }
@@ -210,7 +244,8 @@ const NotificationPopup = ({ onClose }: NotificationPopupProps) => {
       <NotificationItem 
         key={notification.id} 
         notification={notification} 
-        onRead={handleReadNotification} 
+        onRead={handleReadNotification}
+        onClose={onClose} 
       />
     ));
   };

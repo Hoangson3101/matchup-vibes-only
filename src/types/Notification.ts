@@ -7,4 +7,5 @@ export interface Notification {
   timestamp: Date;
   read: boolean;
   image?: string;
+  profileId?: string; // Add profileId for navigation to specific profiles
 }

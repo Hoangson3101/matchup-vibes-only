@@ -12,6 +12,7 @@ const Header = () => {
   const [showPreferences, setShowPreferences] = useState(false);
   const [diamonds, setDiamonds] = useState(0);
   const [unreadNotifications, setUnreadNotifications] = useState(4); // Start with some unread notifications
+  const [notificationOpen, setNotificationOpen] = useState(false);
 
   useEffect(() => {
     // Initialize diamonds from localStorage or set default
@@ -47,6 +48,11 @@ const Header = () => {
     };
   }, []);
 
+  const handleCloseNotifications = () => {
+    setNotificationOpen(false);
+    setUnreadNotifications(0);
+  };
+
   return (
     <header className="matchup-header">
       <div className="flex items-center justify-between w-full">
@@ -71,7 +77,7 @@ const Header = () => {
             </Link>
           </Button>
           
-          <Popover>
+          <Popover open={notificationOpen} onOpenChange={setNotificationOpen}>
             <PopoverTrigger asChild>
               <Button variant="ghost" size="icon" className="text-foreground relative">
                 <Bell size={20} />
@@ -86,7 +92,7 @@ const Header = () => {
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-[340px] p-0" align="end">
-              <NotificationPopup onClose={() => setUnreadNotifications(0)} />
+              <NotificationPopup onClose={handleCloseNotifications} />
             </PopoverContent>
           </Popover>
           
