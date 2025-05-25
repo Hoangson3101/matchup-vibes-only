@@ -1,7 +1,7 @@
 
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { User, MapPin, FileText, MessageSquareText, LogOut, Info, Lock, Diamond } from 'lucide-react';
+import { User, MapPin, FileText, MessageSquareText, LogOut, Info, Lock, Diamond, Shield, HeadphonesIcon } from 'lucide-react';
 
 interface SettingsProps {
   onLogout: () => void;
@@ -32,25 +32,31 @@ const Settings = ({ onLogout }: SettingsProps) => {
           </Button>
         </Link>
         
-        <Button variant="outline" className="w-full justify-start text-base font-normal h-12">
-          <FileText className="mr-2 h-5 w-5" />
-          Chính sách & Quyền riêng tư
-        </Button>
+        <Link to="/privacy-policy" className="w-full">
+          <Button variant="outline" className="w-full justify-start text-base font-normal h-12">
+            <Shield className="mr-2 h-5 w-5 text-green-600" />
+            Chính sách & Quyền riêng tư
+          </Button>
+        </Link>
         
-        <Button variant="outline" className="w-full justify-start text-base font-normal h-12">
-          <MessageSquareText className="mr-2 h-5 w-5" />
-          Hỗ trợ & Feedback
-        </Button>
+        <Link to="/support-feedback" className="w-full">
+          <Button variant="outline" className="w-full justify-start text-base font-normal h-12">
+            <HeadphonesIcon className="mr-2 h-5 w-5 text-blue-600" />
+            Hỗ trợ & Feedback
+          </Button>
+        </Link>
         
         <Button variant="outline" onClick={onLogout} className="w-full justify-start text-base font-normal h-12 text-destructive hover:text-destructive hover:bg-destructive/10">
           <LogOut className="mr-2 h-5 w-5" />
           Đăng xuất
         </Button>
         
-        <Button variant="outline" className="w-full justify-start text-base font-normal h-12">
-          <Info className="mr-2 h-5 w-5" />
-          Về chúng tôi
-        </Button>
+        <Link to="/about-us" className="w-full">
+          <Button variant="outline" className="w-full justify-start text-base font-normal h-12">
+            <Info className="mr-2 h-5 w-5 text-purple-600" />
+            Về chúng tôi
+          </Button>
+        </Link>
       </div>
     </div>
   );
