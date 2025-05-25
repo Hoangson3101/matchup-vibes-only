@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { User, MapPin, FileText, MessageSquareText, LogOut, Info, Lock, Diamond, Shield, HeadphonesIcon, SlidersHorizontal } from 'lucide-react';
+import { User, MapPin, FileText, MessageSquareText, LogOut, Info, Lock, Diamond, Shield, HeadphonesIcon, SlidersHorizontal, UserX } from 'lucide-react';
 import MatchPreferences from './MatchPreferences';
 
 interface SettingsProps {
@@ -30,6 +30,13 @@ const Settings = ({ onLogout }: SettingsProps) => {
           <Button variant="outline" className="w-full justify-start text-base font-normal h-12">
             <Lock className="mr-2 h-5 w-5" />
             Đổi mật khẩu
+          </Button>
+        </Link>
+
+        <Link to="/blocked-users" className="w-full">
+          <Button variant="outline" className="w-full justify-start text-base font-normal h-12">
+            <UserX className="mr-2 h-5 w-5 text-red-600" />
+            Danh sách người bị chặn
           </Button>
         </Link>
 

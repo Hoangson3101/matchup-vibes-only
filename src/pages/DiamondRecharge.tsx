@@ -5,12 +5,10 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ArrowLeft, Diamond, CreditCard, Check } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { toast } from 'sonner';
 
 const DiamondRecharge = () => {
   const navigate = useNavigate();
   const [selectedPackage, setSelectedPackage] = useState<number | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
 
   const diamondPackages = [
     { id: 1, amount: 100, price: 20000, popular: false },
@@ -21,24 +19,17 @@ const DiamondRecharge = () => {
 
   const handlePurchase = () => {
     if (selectedPackage === null) {
-      toast.error("Vui lòng chọn gói kim cương");
       return;
     }
     
-    setIsProcessing(true);
-    
-    // Simulate payment processing
-    setTimeout(() => {
-      setIsProcessing(false);
-      const selectedAmount = diamondPackages.find(pkg => pkg.id === selectedPackage)?.amount || 0;
-      
-      // In a real app, you would update this in the backend/database
-      const currentDiamonds = parseInt(localStorage.getItem('diamonds') || '100');
-      localStorage.setItem('diamonds', (currentDiamonds + selectedAmount).toString());
-      
-      toast.success(`Nạp thành công ${selectedAmount} kim cương!`);
-      navigate('/settings');
-    }, 1500);
+    const selectedPkg = diamondPackages.find(pkg => pkg.id === selectedPackage);
+    if (selectedPkg) {
+      navigate('/payment', {
+        state: {
+          packageData: selectedPkg
+        }
+      });
+    }
   };
 
   const formatPrice = (price: number) => {
@@ -75,7 +66,7 @@ const DiamondRecharge = () => {
         {diamondPackages.map((pkg) => (
           <Card 
             key={pkg.id}
-            className={`p-4 cursor-pointer transition-all ${
+            className={`p-4 cursor-pointer transition-all relative ${
               selectedPackage === pkg.id 
                 ? 'ring-2 ring-primary bg-primary/5' 
                 : 'hover:bg-muted/50'
@@ -106,10 +97,10 @@ const DiamondRecharge = () => {
       <Button 
         className="w-full h-12 mt-4 text-base font-medium"
         onClick={handlePurchase}
-        disabled={selectedPackage === null || isProcessing}
+        disabled={selectedPackage === null}
       >
         <CreditCard className="mr-2 h-5 w-5" />
-        {isProcessing ? 'Đang xử lý...' : 'Thanh toán ngay'}
+        Tiếp tục thanh toán
       </Button>
 
       <p className="text-sm text-muted-foreground text-center mt-4">

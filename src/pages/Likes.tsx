@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { ArrowLeft, HeartHandshake } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { User } from '@/types/User';
 import { motion } from 'framer-motion';
 
@@ -122,31 +124,23 @@ const Likes = () => {
               variants={container}
               initial="hidden"
               animate="show"
-              className="grid grid-cols-2 sm:grid-cols-3 gap-4"
+              className="space-y-4"
             >
               {likes.map((user) => (
                 <motion.div key={user.id} variants={item}>
-                  <Link
-                    to={`/like-detail/${user.id}`}
-                    className="block"
-                  >
-                    <div className="bg-white/90 backdrop-blur rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all hover:scale-105 transform hover:-rotate-1 duration-300 border border-white/20">
-                      <div className="aspect-square overflow-hidden relative">
-                        <img
-                          src={user.avatar || 'https://via.placeholder.com/300?text=User'}
-                          alt={user.name}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-4">
-                          <h3 className="text-white font-bold text-lg">{user.name}</h3>
-                          <div className="mt-1 flex items-center">
-                            <span className="px-2 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium text-white">
-                              {user.gender}
-                            </span>
-                          </div>
+                  <Link to={`/like-detail/${user.id}`}>
+                    <Card className="p-4 hover:shadow-lg transition-all hover:scale-[1.02] duration-300 bg-white/90 backdrop-blur border border-white/20">
+                      <div className="flex items-center space-x-4">
+                        <Avatar className="h-16 w-16">
+                          <AvatarImage src={user.avatar || 'https://via.placeholder.com/300?text=User'} alt={user.name} />
+                          <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1">
+                          <h3 className="text-lg font-bold">{user.name}</h3>
+                          <p className="text-sm text-muted-foreground">{user.gender}</p>
                         </div>
                       </div>
-                    </div>
+                    </Card>
                   </Link>
                 </motion.div>
               ))}

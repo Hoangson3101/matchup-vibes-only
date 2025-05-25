@@ -17,6 +17,8 @@ import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import ChangePassword from "./pages/ChangePassword";
 import DiamondRecharge from "./pages/DiamondRecharge";
+import Payment from "./pages/Payment";
+import BlockedUsers from "./pages/BlockedUsers";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AboutUs from "./pages/AboutUs";
 import SupportFeedback from "./pages/SupportFeedback";
@@ -48,6 +50,8 @@ const App = () => (
           <Route path="/settings" element={<AuthenticatedRoute><Settings /></AuthenticatedRoute>} />
           <Route path="/change-password" element={<AuthenticatedRoute><ChangePassword /></AuthenticatedRoute>} />
           <Route path="/diamond-recharge" element={<AuthenticatedRoute><DiamondRecharge /></AuthenticatedRoute>} />
+          <Route path="/payment" element={<AuthenticatedRoute><Payment /></AuthenticatedRoute>} />
+          <Route path="/blocked-users" element={<AuthenticatedRoute><BlockedUsers /></AuthenticatedRoute>} />
           <Route path="/privacy-policy" element={<AuthenticatedRoute><PrivacyPolicy /></AuthenticatedRoute>} />
           <Route path="/about-us" element={<AuthenticatedRoute><AboutUs /></AuthenticatedRoute>} />
           <Route path="/support-feedback" element={<AuthenticatedRoute><SupportFeedback /></AuthenticatedRoute>} />
