@@ -54,6 +54,13 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
   }
+
+  /* Ensure proper touch targets on mobile */
+  @media (max-width: 640px) {
+    button, a {
+      min-height: 44px;
+    }
+  }
 }
 
 @layer components {
@@ -74,11 +81,11 @@
   }
   
   .matchup-header {
-    @apply fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-md py-3 px-4 border-b border-border flex items-center justify-between;
+    @apply fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-md py-2 sm:py-3 px-2 sm:px-4 border-b border-border flex items-center justify-between;
   }
   
   .swipe-card-container {
-    @apply w-full max-w-sm mx-auto relative h-[70vh];
+    @apply w-full max-w-sm mx-auto relative h-[60vh] sm:h-[70vh];
   }
   
   .swipe-card {
@@ -86,14 +93,38 @@
   }
   
   .swipe-card-actions {
-    @apply absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-6 z-20;
+    @apply absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex gap-4 sm:gap-6 z-20;
   }
   
   .like-button {
-    @apply matchup-button bg-matchup-purple text-white w-16 h-16 shadow-lg hover:shadow-xl hover:bg-matchup-purple/90;
+    @apply matchup-button bg-matchup-purple text-white w-12 h-12 sm:w-16 sm:h-16 shadow-lg hover:shadow-xl hover:bg-matchup-purple/90;
   }
   
   .dislike-button {
-    @apply matchup-button bg-white text-matchup-pink w-16 h-16 shadow-lg hover:shadow-xl border border-matchup-pink;
+    @apply matchup-button bg-white text-matchup-pink w-12 h-12 sm:w-16 sm:h-16 shadow-lg hover:shadow-xl border border-matchup-pink;
+  }
+
+  /* Responsive table improvements */
+  .table-scroll {
+    @apply overflow-x-auto;
+  }
+  
+  .table-scroll table {
+    @apply min-w-full;
+  }
+  
+  /* Mobile optimizations */
+  @media (max-width: 1024px) {
+    .admin-content {
+      @apply ml-0;
+    }
+    
+    .admin-sidebar {
+      @apply transform -translate-x-full lg:translate-x-0;
+    }
+    
+    .admin-sidebar.open {
+      @apply translate-x-0;
+    }
   }
 }
