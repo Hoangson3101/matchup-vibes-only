@@ -1,18 +1,31 @@
 
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { User, MapPin, FileText, MessageSquareText, LogOut, Info, Lock, Diamond, Shield, HeadphonesIcon } from 'lucide-react';
+import { User, MapPin, FileText, MessageSquareText, LogOut, Info, Lock, Diamond, Shield, HeadphonesIcon, SlidersHorizontal } from 'lucide-react';
+import MatchPreferences from './MatchPreferences';
 
 interface SettingsProps {
   onLogout: () => void;
 }
 
 const Settings = ({ onLogout }: SettingsProps) => {
+  const [showPreferences, setShowPreferences] = useState(false);
+
   return (
     <div className="w-full max-w-md mx-auto p-4">
       <h2 className="text-2xl font-bold mb-6 text-center">Cài đặt</h2>
       
       <div className="space-y-3">
+        <Button 
+          variant="outline" 
+          className="w-full justify-start text-base font-normal h-12"
+          onClick={() => setShowPreferences(true)}
+        >
+          <SlidersHorizontal className="mr-2 h-5 w-5 text-blue-600" />
+          Tiêu chí ghép đôi
+        </Button>
+
         <Link to="/change-password" className="w-full">
           <Button variant="outline" className="w-full justify-start text-base font-normal h-12">
             <Lock className="mr-2 h-5 w-5" />
@@ -58,6 +71,8 @@ const Settings = ({ onLogout }: SettingsProps) => {
           </Button>
         </Link>
       </div>
+
+      <MatchPreferences open={showPreferences} onClose={() => setShowPreferences(false)} />
     </div>
   );
 };

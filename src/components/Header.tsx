@@ -3,13 +3,11 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { User, Heart, MessageCircle, Settings, Diamond, Bell } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import MatchPreferences from './MatchPreferences';
 import { Badge } from '@/components/ui/badge';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import NotificationPopup from './NotificationPopup';
 
 const Header = () => {
-  const [showPreferences, setShowPreferences] = useState(false);
   const [diamonds, setDiamonds] = useState(0);
   const [unreadNotifications, setUnreadNotifications] = useState(4); // Start with some unread notifications
   const [notificationOpen, setNotificationOpen] = useState(false);
@@ -96,13 +94,10 @@ const Header = () => {
             </PopoverContent>
           </Popover>
           
-          <Button 
-            variant="ghost" 
-            size="icon"
-            className="text-foreground"
-            onClick={() => setShowPreferences(true)}
-          >
-            <Settings size={20} />
+          <Button variant="ghost" size="icon" asChild className="text-foreground">
+            <Link to="/settings">
+              <Settings size={20} />
+            </Link>
           </Button>
           
           <div className="relative">
@@ -120,8 +115,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-
-      <MatchPreferences open={showPreferences} onClose={() => setShowPreferences(false)} />
     </header>
   );
 };
