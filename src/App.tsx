@@ -25,6 +25,14 @@ import SupportFeedback from "./pages/SupportFeedback";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import CreateProfile from "./pages/CreateProfile";
 import LikeDetail from "./pages/LikeDetail";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminAccounts from "./pages/AdminAccounts";
+import AdminUserProfile from "./pages/AdminUserProfile";
+import AdminReports from "./pages/AdminReports";
+import AdminNotifications from "./pages/AdminNotifications";
+import AdminDiscountCodes from "./pages/AdminDiscountCodes";
+import AdminPackages from "./pages/AdminPackages";
+import AdminInvoices from "./pages/AdminInvoices";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +48,16 @@ const App = () => (
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/create-profile" element={<CreateProfile />} />
+          
+          {/* Admin routes */}
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/accounts" element={<AdminAccounts />} />
+          <Route path="/admin/user-profile/:userId" element={<AdminUserProfile />} />
+          <Route path="/admin/reports" element={<AdminReports />} />
+          <Route path="/admin/notifications" element={<AdminNotifications />} />
+          <Route path="/admin/discount-codes" element={<AdminDiscountCodes />} />
+          <Route path="/admin/packages" element={<AdminPackages />} />
+          <Route path="/admin/invoices" element={<AdminInvoices />} />
           
           {/* Protected routes */}
           <Route path="/" element={<AuthenticatedRoute><Index /></AuthenticatedRoute>} />
